@@ -1,0 +1,21 @@
+{% extends 'core/index.html' %}
+{% block title %}Nueva Noticia{% endblock %} 
+{% load static %}
+{% block content %}
+<section class="Seccion">
+    <div class="Contenedor">
+        <h2>Nueva Noticia</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Publicar">
+        </form>
+        {{ mensaje }}
+        <div>
+            <a class="Boton Boton-mod" href="{% url 'home' %}">Regresar</a>
+        </div>
+</section>
+
+{% endblock %}

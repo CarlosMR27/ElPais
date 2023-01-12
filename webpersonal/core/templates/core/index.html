@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | Elpais</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
+    <link rel="icon" href="{% static 'core/img/Elpaislogo.svg' %}" type="svg">
+</head>
+<body>
+    <br>
+    <header class="Cabecera">
+        <!---Botones-->
+        {% if user.is_authenticated %}
+        <section class="Contenedor">
+            <div class="hero">
+                <nav class="nav-d">
+                    <img src="{% static 'core/img/inicio.png' %}" alt="" class="user-pic" onclick="toggleMenu()">
+                    <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                <img src="{% static 'core/img/inicio.png' %}" alt="">
+                                <h4>{{ user.get_username }}</h4>
+                            </div>
+                            <hr>
+                            <a href="#" class="sub-menu-link">
+                                <img src="{% static 'core/img/profile.png' %}" alt="">
+                                <p>Editar perfil</p>
+                            </a>
+                            <a href="{% url 'agregar' %}" class="sub-menu-link">
+                                <img src="{% static 'core/img/nueva_noticia.png' %}" alt="">
+                                <p>Publicar noticia</p>
+                            </a>
+                            <a href="{% url 'lista' %}" class="sub-menu-link">
+                                <img src="{% static 'core/img/lista.png' %}" alt="">
+                                <p>Noticias redactadas</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="{% static 'core/img/setting.png' %}" alt="">
+                                <p>Configuración</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="{% static 'core/img/help.png' %}" alt="">
+                                <p>Ayuda y Soporte</p>
+                            </a>
+                            <a href="{% url 'logout' %}" class="sub-menu-link">
+                                <img src="{% static 'core/img/logout.png' %}" alt="">
+                                <p>Cerrar sesión</p>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+        </section>
+        {% else %}
+        <section class="Contenedor Contenido-header">
+            <div>
+                <a class="Boton" href="{% url 'registro' %}">Registrarse</a>
+            </div>
+            <div>
+                <a class="Boton" href="{% url 'login' %}">Iniciar sesión</a>
+            </div>
+        </section>
+        {% endif %}
+    <!---Logo el pais-->
+        <div class="Contenedor logo">
+            <a href="{% url 'home' %}">
+                <img class="logo" src="{% static 'core/img/Elpaislogo.jpg' %}" alt="">
+            </a>
+        </div>
+        <br>
+        <div class="Contenedor Barra">
+            <nav class="Navegacion">
+                <a href="#">Actualidad</a>
+                <a href="#">Crónica</a>
+                <a href="#">Internacionales</a>
+                <a href="#">Deportes</a>
+                <a href="#">Insólito</a>
+                <a href="#">Tendencias</a>
+                <a href="#">Farándula</a>
+                <a href="#">Tecnología</a>
+            </nav>
+        </div>
+    </header>
+    <!---Contenido-->
+    {% block content %} {% endblock %}
+
+
+    <!---Footer-->
+    <footer>
+        <div class="Contenedor linea">
+            <section class="Contenedor-footer">
+                <div>
+                    <nav class="Navegacion-footer">
+                        <a href="{% url 'contact' %}">Contáctenos</a> -
+                        <a href="{% url 'about' %}">Más sobre nosotros</a> -
+                        <a href="#">Política de privacidad</a> -
+                        <a href="#">Política de cookies</a> -
+                        <a href="#">Condiciones de uso</a> -
+                        <a href="#">Aviso legal</a> - 
+                        <a href="#">Condiciones contratacion</a>
+                    </nav>
+                </div>
+                <div class="redes">
+                    <a class="a" href="https://www.facebook.com/">
+                        <img class="icono_footer" src="{% static 'core/img/facebook.jpg' %}" alt="">
+                    </a>
+                    <a class="a" href="https://twitter.com/">
+                        <img class="icono_footer" src="{% static 'core/img/twitter.jpg' %}" alt="">
+                    </a>
+                    <a class="a" href="https://www.instagram.com/">
+                        <img class="icono_footer" src="{% static 'core/img/insta.jpg' %}" alt="">
+                    </a>
+                </div>
+            </section>
+        </div>
+    </footer>
+    <script>
+        let subMenu = document.getElementById("subMenu");
+        function toggleMenu(){
+            subMenu.classList.toggle("open-menu");    
+        }
+    </script>
+</body>
+</html>

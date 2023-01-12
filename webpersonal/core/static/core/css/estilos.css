@@ -1,0 +1,268 @@
+html {
+
+    font-size: 62.5%;
+    /* Reset para REMS - 62.5% = 10px de 16px*/
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.6rem;
+    line-height: 2;
+}
+
+/*Globlales*/
+
+
+
+.Contenedor {
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 3.8rem;
+}
+
+h2 {
+    font-size: 3.4rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+h4 {
+    font-size: 2.6rem;
+}
+
+/*Utlidades*/
+
+.Seccion {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.Fw-300 {
+    font-weight: 300;
+}
+
+.Centrar-texto {
+    text-align: center;
+}
+
+.d-block {
+    display: block !important;
+}
+
+/*Botones*/
+
+.Boton {
+    color: rgb(255, 255, 255);
+    font-size: 1.4rem;
+    padding: 0.5rem 0.8rem;
+    text-decoration: none;
+    margin-top: 1rem;
+    margin: 0.4rem;
+    text-align: center;
+    font-weight: 600;
+    background-color: #030303;
+}
+
+.Boton:hover{
+    color: rgb(251, 255, 0);
+}
+
+.Boton-mod{
+margin: 55rem;
+font-size: 1.8rem;
+}
+
+.Boton-lista{
+    font-weight: 600;
+    }
+/*Cabera del sitio*/
+
+.Login{
+    height: 4rem;
+}
+
+.icono {
+    float: right;
+    height: 3rem;
+}
+
+.icono_footer {
+    height: 3rem;
+}
+
+.logo {
+    display: flex;
+    height: 15rem;
+    justify-content: center;
+}
+
+.linea {
+    border-top: 1px solid black;
+    height: 2px;
+    padding: 0;
+    margin: 20px auto 0 auto;
+  }
+
+.Contenido-header {
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.Barra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+/*Menú desplegable*/
+
+.hero{
+    width: 100%;
+    min-height: 3rem;
+    background: #eceaff;
+    color: #525252;
+}
+
+.nav-d{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+}
+
+.user-pic{
+    height: 3.8rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sub-menu-wrap{
+    position: absolute;
+    top: 70%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+.sub-menu-wrap.open-menu{
+    max-height: 600px;
+}
+
+.sub-menu{
+    background: #fff ;
+    padding: 20px;
+    margin: 10px;
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.user-info h5{
+    font-weight: 500;
+}
+
+.user-info img{
+    width: 4rem;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sub-menu hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    margin: 15px 0 10px;
+}
+
+.sub-menu-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+}
+
+.sub-menu-link p{
+    width: 100%;
+}
+
+.sub-menu-link img{
+    width: 30px;
+    background: #e5e5e5;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.sub-menu-link:hover p{
+    font-weight: 600;
+}
+
+/*Navegacion*/
+
+.Navegacion a {
+
+    color: rgb(255, 255, 253);
+    font-size: 1.8rem;
+    margin-right: 3rem;
+    text-decoration: none;
+    text-align: center;
+
+}
+
+.Navegacion-footer a {
+
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.Navegacion a:hover {
+    color: rgb(251, 255, 0);
+    font-weight: 600;
+}
+/*Tablas*/
+.tabla-lista {
+    width: 100%;
+    text-align: center;
+ }
+/*Footer*/
+
+.Site-footer{
+    background-color: #333333;
+    margin: 0;
+}
+
+.Contenedor-footer{
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+.redes{
+    display: flex;
+    margin:  1rem 1rem;
+    justify-content: center;
+}
+
+.a{
+    margin: 1rem;
+}
+
+.Copyright{
+    margin: 0;
+    color: white;
+}

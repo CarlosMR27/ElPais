@@ -1,0 +1,39 @@
+{% extends 'core/index.html' %}
+{% block title %}Listado{% endblock %} 
+{% load static %}
+{% block content %}
+<section class="Seccion">
+    <div class="Contenedor">
+        <h2>Noticias Redactadas</h2>
+        <table class="tabla-lista">
+            <tr>
+                <th>Título</th>
+                <th>Sección</th>
+                <th>Creación</th>
+                <th>Última modificación</th>
+                <th>Opciones</th>
+            </tr>
+
+            {%for i in Noticias %}
+            <tr>
+                <td>{{ i.titulo }}</td>
+                <td>{{ i.seccion }}</td>
+                <td>{{ i.creacion }}</td>
+                <td>{{ i.update }}</td>
+                <td>
+                    <a class="Boton Boton-lista" href="{% url 'modificar' i.id %}">Modificar</a>
+                    <a class="Boton Boton-lista" href="#" onclick="confirmarEliminacion({{i.id}})">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <div>
+            <a class="Boton Boton-mod" href="{% url 'home' %}">Regresar</a>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="{% static 'core/js/confirmacion.js' %}"></script>
+
+{% endblock %}
