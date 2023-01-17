@@ -2,12 +2,64 @@
 {% block title %}Home{% endblock %} 
 {% load static %}
 {% block content %}
-<section class="Seccion">
-    <div class="Contenedor">
-        <h2>Portada</h2>
-        <p>Muestra del proyecto</p>
-        <p>Distincion del codigo</p>
+<br>
+        <div class="Contenedor Barra">
+            <nav class="Navegacion">
+                <a href="#">Actualidad</a>
+                <a href="#">Crónica</a>
+                <a href="#">Internacionales</a>
+                <a href="#">Deportes</a>
+                <a href="#">Insólito</a>
+                <a href="#">Tendencias</a>
+                <a href="#">Farándula</a>
+                <a href="#">Tecnología</a>
+            </nav>
+            <div class="search" onmouseover="toggleSearch()">
+                <form action="#" method="GET">
+                    <button type="submit">
+                        <i class="fa fa-search" style="font-size: 18px;" onmouseout="toggleSearch()"></i>
+                    </button>
+                    <input type="text" placeholder=" Buscar noticia" name="buscar" class="search" id="search" onmouseover="toggleSearch()" value="{{request.GET.buscar}}">
+            </div>
+        </div>
+<section class="Contenedor">
+    <h2>ACTUALIDAD</h2>
+    <div class="Contenedor-body">
+        <div class="Contenedor-noticias">
+            {% for i in noticias%}
+            <div class="Noticia">
+                <a href="">
+                    <figure>
+                        <img class="imagen-noticia" src="{{i.imagen.url}}">
+                    </figure>
+                </a>
+                <div class="Titulo-noticia">
+                    <a href="">
+                        <h1>{{i.titulo}}</h1> 
+                    </a>
+                </div>
+            </div>
+            {% endfor%}
+        </div>
+        <div class="Contenedor-noticias">
+            <div class="Noticia">
+                <a href="">
+                    <img class="imagen-noticia" src="{% static 'core/img/user.png' %}">
+                </a>
+                <div class="Titulo-noticia">
+                    <a href="">
+                        <p>Preueba barra de busqueda</p>  
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+<script>
+    let search = document.getElementById("search");
+    function toggleSearch(){
+        search.classList.toggle("search-open");    
+    }
+</script>
 {% endblock %}
 

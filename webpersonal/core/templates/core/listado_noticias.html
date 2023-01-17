@@ -4,6 +4,7 @@
 {% block content %}
 <section class="Seccion">
     <div class="Contenedor">
+        <hr>
         <h2>Noticias Redactadas</h2>
         <table class="tabla-lista">
             <tr>
@@ -11,16 +12,16 @@
                 <th>Sección</th>
                 <th>Creación</th>
                 <th>Última modificación</th>
-                <th>Opciones</th>
+                <th class="tabla opciones">Opciones</th>
             </tr>
 
             {%for i in Noticias %}
             <tr>
-                <td>{{ i.titulo }}</td>
-                <td>{{ i.seccion }}</td>
-                <td>{{ i.creacion }}</td>
-                <td>{{ i.update }}</td>
-                <td>
+                <td class="tabla-titulo">{{ i.titulo }}</td>
+                <td class="tabla-seccion">{{ i.seccion }}</td>
+                <td class="tabla-fecha">{{ i.creacion }}</td>
+                <td class="tabla-fecha">{{ i.update }}</td>
+                <td class="tabla opciones">
                     <a class="Boton Boton-lista" href="{% url 'modificar' i.id %}">Modificar</a>
                     <a class="Boton Boton-lista" href="#" onclick="confirmarEliminacion({{i.id}})">Eliminar</a>
                 </td>

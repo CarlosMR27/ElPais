@@ -3,6 +3,7 @@ from .models import Noticia1
 from .forms import Nuevanoticia, CustomUserForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.db.models import Q
 
 # Create your views here.
 
@@ -11,7 +12,13 @@ html_base = """
 """
 
 def home(request):
-    return render(request,'core/home.html')
+    busqueda = request.GET.get("buscar")
+    noticias = Noticia1.objects.all
+    if busqueda:
+        noticias = Noticia1.objects.filter(
+            Q(titulo__icontains = busqueda)
+        ).distinct()
+    return render(request,'core/home.html',{"noticias": noticias})
 
 def about(request):
     return render(request,'core/about.html')
