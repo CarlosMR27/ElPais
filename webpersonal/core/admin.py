@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Noticia1, Seccion
+from .models import Noticia, Seccion
 
 class NoticiaAdmin(admin.ModelAdmin):
     list_display = ['titulo', 'seccion']
@@ -9,4 +9,4 @@ class NoticiaAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Seccion)
-admin.site.register(Noticia1, NoticiaAdmin)
+admin.site.register(Noticia, NoticiaAdmin)

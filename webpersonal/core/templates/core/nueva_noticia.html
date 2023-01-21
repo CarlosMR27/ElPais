@@ -4,16 +4,17 @@
 {% block content %}
 <section class="Seccion">
     <div class="Contenedor">
-        <hr>
         <h2>Nueva Noticia</h2>
+        <hr>
         <form action="" method="POST">
             {% csrf_token %}
             <table>
-                {{ form.as_table }}
+                {{form.as_p}}
             </table>
+            {{form.media}}
             <input type="submit" value="Publicar">
         </form>
-        {{ mensaje }}
+        <h4>{{ mensaje }}</h4>
         <div>
             <a class="Boton Boton-mod" href="{% url 'home' %}">Regresar</a>
         </div>

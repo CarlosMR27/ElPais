@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'crispy_forms',
+    'ckeditor',
 ]
+
+CRISPY_TEMPLATE_PACK ='bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +84,7 @@ WSGI_APPLICATION = 'webpersonal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ElPais',
+        'NAME': 'ElPaisDB',
         'USER': 'postgres',
         'PASSWORD': 'Carlos123',
         'HOST': 'localhost',
@@ -127,6 +131,8 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT=BASE_DIR / 'media'
+
+CKEDITOR_UPLOAD_PATH="uploads/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

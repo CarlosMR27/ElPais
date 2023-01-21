@@ -1,0 +1,123 @@
+{% extends 'core/index.html' %}
+{% block title %}{{noticias.titulo}}{% endblock %} 
+{% load static %}
+{% block content %}
+<section class="Contenedor">
+    <div class="seccion-public">
+        <h2 class="seccion-public">{{noticias.seccion}}</h2>
+    </div> 
+    <div class="titulo-public">
+        <h1>{{noticias.titulo}}</h1>
+    </div>
+    <div class="portada">
+        <img src="{{noticias.imagen.url}}" alt="">
+    </div>
+    <div class="contenido-public">
+        <div class="info-public">
+            <div class="Contenedor linea"></div>
+            <div class="autor-info">
+                <img class="autor-foto" src="{% static 'core/img/inicio.png' %}" alt="">
+                <div>
+                    <h5>Carlos Moreira</h5>
+                    <p>{{noticias.creacion}}</p>
+                    <hr>
+                    <div class="redes-autor">
+                        <a href="#">
+                            <img class="icono_autor" src="{% static 'core/img/twitter.jpg' %}" alt="">
+                        </a>
+                        <a href="#">
+                            <img class="icono_autor" src="{% static 'core/img/insta.jpg' %}" alt="">
+                        </a>
+                        <a href="#">
+                            <img class="icono_autor" src="{% static 'core/img/gmail.png' %}" alt="">
+                        </a>
+                    </div> 
+                </div>
+            </div>
+            
+            <div class="publicacion">
+                    <p>
+                        {{noticias.cuerpo|safe}}
+                    </p>
+                    <hr>
+                    <div class="recomendados">
+                        <h4 class="recomendados">Recomendados</h4>
+                    </div>
+                    <br>
+                    <div class="Contenedor-recomendados">
+                        {% for i in recomendados %}
+            <div class="Noticia">
+                <div class="Contenedor-img">
+                    <a href="{% url 'publicacion' i.slug %}">
+                        <figure>
+                            <img class="imagen-noticia" src="{{i.imagen.url}}">
+                        </figure>
+                    </a>
+                </div>
+                <div class="Titulo-noticia">
+                    {% if i.seccion.name == "Actualidad" %}
+                        <a href="{% url 'actualidad' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% elif i.seccion.name == "Crónica"%}
+                        <a href="{% url 'cronica' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% elif i.seccion.name == "Deportes"%}
+                        <a href="{% url 'internacionales' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% elif i.seccion.name == "Deportes"%}
+                        <a href="{% url 'deportes' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% elif i.seccion.name == "Insólito"%}
+                        <a href="{% url 'insolito' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% elif i.seccion.name == "Tendendias"%}
+                        <a href="{% url 'tendencias' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% elif i.seccion.name == "Farándula"%}
+                        <a href="{% url 'farandula' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% elif i.seccion.name == "Tecnología"%}
+                        <a href="{% url 'tecnologia' %}">
+                            <h2>{{i.seccion}}</h2>
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'publicacion' i.slug %}">
+                        <h1>{{i.titulo}}</h1>  
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+                    </div>
+            </div>
+        </div>
+        <div class="Contendedor-noticias">
+            <div>
+                <h4 class="recomendados">Similares</h4>
+            </div>
+            {% for i in similares%}
+            <div class="Noticia">
+                <div class="Contenedor-img">
+                    <a href="{% url 'publicacion' i.slug %}">
+                        <figure>
+                            <img class="imagen-noticia" src="{{i.imagen.url}}">
+                        </figure>
+                    </a>
+                </div>
+                <div class="Titulo-noticia">
+                    <a href="{% url 'publicacion' i.slug %}">
+                        <h1>{{i.titulo}}</h1>  
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div> 
+    </div>
+</section>
+{% endblock %}

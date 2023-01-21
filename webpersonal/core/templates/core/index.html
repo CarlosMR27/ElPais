@@ -39,7 +39,7 @@
                                 <img src="{% static 'core/img/lista.png' %}" alt="">
                                 <p>Noticias redactadas</p>
                             </a>
-                            <a href="#" class="sub-menu-link">
+                            <a href="/admin/" class="sub-menu-link">
                                 <img src="{% static 'core/img/setting.png' %}" alt="">
                                 <p>Configuración</p>
                             </a>
@@ -71,10 +71,32 @@
                 <img class="logo" src="{% static 'core/img/Elpaislogo.jpg' %}" alt="">
             </a>
         </div>
+        <br>
+        <div class="Contenedor Barra">
+            <nav class="Navegacion">
+                <a href="{% url 'actualidad' %}">Actualidad</a>
+                <a href="{% url 'cronica' %}">Crónica</a>
+                <a href="{% url 'internacionales' %}">Internacionales</a>
+                <a href="{% url 'deportes' %}">Deportes</a>
+                <a href="{% url 'insolito' %}">Insólito</a>
+                <a href="{% url 'tendencias' %}">Tendencias</a>
+                <a href="{% url 'farandula' %}">Farándula</a>
+                <a href="{% url 'tecnologia' %}">Tecnología</a>
+            </nav>
+            {% if not user.is_staff %}
+                <div class="search" onmouseover="toggleSearch()">
+                    <form action="#" method="GET">
+                        <button type="submit">
+                            <i class="fa fa-search" style="font-size: 18px;" onmouseout="toggleSearch()"></i>
+                        </button>
+                        <input type="text" placeholder=" Buscar noticia" name="buscar" class="search" id="search" onmouseover="toggleSearch()" value="{{request.GET.buscar}}">
+                </div>
+            {% endif %}
+        </div>
     </header>
     <!---Contenido-->
-    {% block content %} {% endblock %}
-
+    {% block content %} 
+    {% endblock %}
 
     <!---Footer-->
     <footer>
@@ -82,12 +104,12 @@
             <section class="Contenedor-footer">
                 <div>
                     <nav class="Navegacion-footer">
-                        <a href="{% url 'contact' %}">Contáctenos</a> -
-                        <a href="{% url 'about' %}">Más sobre nosotros</a> -
-                        <a href="#">Política de privacidad</a> -
-                        <a href="#">Política de cookies</a> -
-                        <a href="#">Condiciones de uso</a> -
-                        <a href="#">Aviso legal</a> - 
+                        <a href="{% url 'contact' %}">Contáctenos -</a>
+                        <a href="{% url 'about' %}">Más sobre nosotros -</a>
+                        <a href="#">Política de privacidad -</a>
+                        <a href="#">Política de cookies -</a>
+                        <a href="#">Condiciones de uso -</a>
+                        <a href="#">Aviso legal -</a> 
                         <a href="#">Condiciones contratacion</a>
                     </nav>
                 </div>
@@ -109,6 +131,12 @@
         let subMenu = document.getElementById("subMenu");
         function toggleMenu(){
             subMenu.classList.toggle("open-menu");    
+        }
+    </script>
+    <script>
+        let search = document.getElementById("search");
+        function toggleSearch(){
+            search.classList.toggle("search-open");    
         }
     </script>
 </body>

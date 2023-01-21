@@ -32,10 +32,10 @@
                     <div class="titulo">
                         Bienvenido
                     </div>
-                    <form id="loginform" method="post" action ="">   
+                    <form method="post" action ="">   
                         {% csrf_token %}
-                        {{form}}                     
-                        <button type="submit" title="Ingresar" name="Ingresar">Iniciar sesión</button>
+                        {{form}}
+                        <button type="submit" title="Login" name="login">Login</button>                     
                     </form>
                     <div class="pie-form">
                         <a href="#">¿Perdiste tu contraseña?</a>

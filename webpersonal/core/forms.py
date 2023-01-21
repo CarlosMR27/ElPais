@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from.models import Noticia1
+from.models import Noticia
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 class Nuevanoticia(ModelForm):
     
     class Meta:
-        model = Noticia1
-        fields = ['titulo', 'cuerpo', 'imagen', 'enlace', 'seccion']
+        model = Noticia
+        fields = ['titulo', 'slug', 'cuerpo', 'imagen', 'enlace', 'seccion']
 
 
 class CustomUserForm(UserCreationForm):
