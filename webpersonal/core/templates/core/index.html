@@ -15,34 +15,53 @@
     <br>
     <header class="Cabecera">
         <!---Botones-->
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and not user.is_anonymous %}
         <section class="Contenedor">
             <div class="hero">
                 <nav class="nav-d">
-                    <img src="{% static 'core/img/inicio.png' %}" alt="" class="user-pic" onclick="toggleMenu()">
+                    <figure>
+                        <img src="{{ user.user_personalizado.profilepic.url }}" alt="" class="user-pic" onclick="toggleMenu()">
+                    </figure>
                     <div class="sub-menu-wrap" id="subMenu">
                         <div class="sub-menu">
-                            <div class="user-info">
-                                <img src="{% static 'core/img/inicio.png' %}" alt="">
+                            <div class="user-info"> 
+                                <figure>
+                                    <img src="{{ user.user_personalizado.profilepic.url }}" alt="">
+                                </figure>
                                 <h4>{{ user.get_username }}</h4>
                             </div>
                             <hr>
-                            <a href="#" class="sub-menu-link">
+                            {% if user.is_staff or user.user_personalizado.es_editor %}
+                            
+                            {% else %}
+                            <a href="{% url 'perfil' user.username %}" class="sub-menu-link">
                                 <img src="{% static 'core/img/profile.png' %}" alt="">
-                                <p>Editar perfil</p>
+                                <p>Ver perfil</p>
                             </a>
+                            {% endif %}
+                            {% if perms.core.add_noticia and not user.is_staff %}
                             <a href="{% url 'agregar' %}" class="sub-menu-link">
                                 <img src="{% static 'core/img/nueva_noticia.png' %}" alt="">
                                 <p>Publicar noticia</p>
                             </a>
+                            {% endif %}
+                            {% if perms.core.view_noticia %}
                             <a href="{% url 'lista' %}" class="sub-menu-link">
                                 <img src="{% static 'core/img/lista.png' %}" alt="">
                                 <p>Noticias redactadas</p>
                             </a>
+                            {% endif %}
+                            {% if user.is_staff %}
                             <a href="/admin/" class="sub-menu-link">
+                                <img src="{% static 'core/img/setting.png' %}" alt="">
+                                <p>Sito del Admin</p>
+                            </a>
+                            {% else %}
+                            <a href="#" class="sub-menu-link">
                                 <img src="{% static 'core/img/setting.png' %}" alt="">
                                 <p>Configuración</p>
                             </a>
+                            {% endif %}
                             <a href="#" class="sub-menu-link">
                                 <img src="{% static 'core/img/help.png' %}" alt="">
                                 <p>Ayuda y Soporte</p>
@@ -83,15 +102,16 @@
                 <a href="{% url 'farandula' %}">Farándula</a>
                 <a href="{% url 'tecnologia' %}">Tecnología</a>
             </nav>
-            {% if not user.is_staff %}
-                <div class="search" onmouseover="toggleSearch()">
-                    <form action="#" method="GET">
-                        <button type="submit">
-                            <i class="fa fa-search" style="font-size: 18px;" onmouseout="toggleSearch()"></i>
-                        </button>
-                        <input type="text" placeholder=" Buscar noticia" name="buscar" class="search" id="search" onmouseover="toggleSearch()" value="{{request.GET.buscar}}">
-                </div>
-            {% endif %}
+            {% block buscador %}
+            <div class="search" onmouseover="toggleSearch()">
+                <form action="#" method="GET">
+                    <button type="submit">
+                        <i class="fa fa-search" style="font-size: 18px;"></i>
+                    </button>
+                    <input type="text" placeholder=" Buscar noticia" name="buscar" class="search" id="search" onmouseover="toggleSearch()" value="{{request.GET.buscar}}">
+                </form>
+            </div>
+            {% endblock %}
         </div>
     </header>
     <!---Contenido-->

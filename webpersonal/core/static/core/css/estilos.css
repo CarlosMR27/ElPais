@@ -8,7 +8,7 @@ body {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
-/*Globlales*/
+/*Globales---------------------------------------------------------------------------------------------------------------*/
 
 a{
     text-decoration: none;
@@ -48,26 +48,14 @@ h5{
     font-size: 2.2rem;
 }
 
-/*Utlidades*/
+/*Utilidades---------------------------------------------------------------------------------------------------------------*/
 
 .Seccion {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
-.Fw-300 {
-    font-weight: 300;
-}
-
-.Centrar-texto {
-    text-align: center;
-}
-
-.d-block {
-    display: block !important;
-}
-
-/*Botones*/
+/*Botones---------------------------------------------------------------------------------------------------------------*/
 
 .Boton {
     color: rgb(255, 255, 255);
@@ -86,8 +74,8 @@ h5{
 }
 
 .Boton-mod{
-margin: 55rem;
-font-size: 1.8rem;
+    margin: 55rem;
+    font-size: 1.8rem;
 }
 
 .Boton-mod:hover{
@@ -97,9 +85,10 @@ font-size: 1.8rem;
 .Boton-lista{
     font-weight: 600;
     margin: -0.0rem;
+    color: white;
 }
 
-/*Cabera del sitio*/
+/*Cabecera de sitio---------------------------------------------------------------------------------------------------------------*/
 
 .Login{
     height: 4rem;
@@ -137,13 +126,12 @@ font-size: 1.8rem;
     height: 4rem;
 }
 
-/*Menú desplegable*/
+/*Menú desplegable---------------------------------------------------------------------------------------------------------------*/
 
 .hero{
     width: 100%;
     min-height: 3rem;
-    background: #eceaff;
-    color: #525252;
+    /* background: #eceaff; */
 }
 
 .nav-d{
@@ -153,15 +141,24 @@ font-size: 1.8rem;
     position: relative;
 }
 
-.user-pic{
-    height: 3.8rem;
+.nav-d figure{
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    border: solid 3px;
+    color: black;
+}
+.user-pic{
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
 }
 
 .sub-menu-wrap{
     position: absolute;
-    top: 70%;
+    top: 82%;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s;
@@ -187,12 +184,13 @@ font-size: 1.8rem;
 .user-info h4{
     min-width: 15rem;
     text-align: center;
+    margin-left: 10px;
 }
 
 .user-info img{
-    width: 4rem;
-    border-radius: 50%;
-    margin-right: 15px;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
 }
 
 .sub-menu hr{
@@ -227,7 +225,7 @@ font-size: 1.8rem;
     font-weight: 600;
 }
 
-/*Navegacion*/
+/*Navegación---------------------------------------------------------------------------------------------------------------*/
 
 .Navegacion a {
 
@@ -255,14 +253,14 @@ margin-top: 4rem;
     font-weight: 600;
 }
 
-/*Barra de búsqueda*/
+/*Barra de búsqueda---------------------------------------------------------------------------------------------------------------*/
 .search input[type=text]{
     max-width:0;
     max-height:25px;
     border-radius:25px;
     border: 1px;
     margin-right: 0.5rem;
-    position: absolute;
+    /* position: absolute; */
     right: 22%;
     background-color: #ffffff;
     border: none;
@@ -294,13 +292,14 @@ margin-top: 4rem;
     border: none;
     cursor: pointer;
 }
-/*Tablas*/
+/*Tablas---------------------------------------------------------------------------------------------------------------*/
 
 .tabla-lista {
-    width: 95%;
+    width: 100%;
     font-size: large;
     text-align: center;
  }
+
 
  .tabla-titulo {
     width: 40rem;
@@ -310,11 +309,19 @@ margin-top: 4rem;
  }
 
  .tabla-seccion {
-    width: 14rem;
+    width: 12rem;
  }
 
  .tabla-fecha {
     width: 18rem;
+ }
+
+ .tabla-autor{
+    width: 12rem;
+ }
+
+ .tabla-autor a{
+    color: #000000;
  }
 
  .tabla-opciones {
@@ -322,7 +329,11 @@ margin-top: 4rem;
     border: none;
  }
 
-/*Contendeor de noticias*/
+ .Boton-tabla{
+    margin-block-start: 5rem;
+ }
+
+/*Contenedor noticas---------------------------------------------------------------------------------------------------------------*/
 
 .Contenedor-body {
     display: flex;
@@ -331,31 +342,72 @@ margin-top: 4rem;
 }
 
 .Contenedor-anuncios {
-    display: flex;
-    flex-wrap: wrap;
+    
+}
+
+.figure-anuncios{
+    height: 55rem;
+    width: 26rem;
 }
 
 .Contenedor-noticias {
     display: flex;
+    justify-content: space-between;
+    margin-right: 2rem;
     flex-wrap: wrap;
+    width: 90rem;
+    /* flex-direction: column-reverse; */
+}
+
+.Contenedor-noticias-seccion {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
 }
 
 .Anuncio{
+    margin-top: 1rem;
+    width: 26rem;
+}
+
+.Primera-plana {
     margin-right: 1rem;
     margin-top: 1rem;
-    width: 25rem;
+    width: 90rem;
+}
+
+.Primera-plana a{
+    color: black;
+}
+.Primera-plana figure{
+    margin: 0;
+    height: 70rem;
+    width: 90rem;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: all 500ms ease;
+}
+.Primera-plana h1{
+    margin-block-start: 0.5rem;
+    line-height: 1.4;
+    font-size: larger;
+    text-transform: uppercase;
+}
+
+.Primera-plana h1:hover{
+    color: rgb(105, 104, 104);    
 }
 
 .Noticia {
     margin-right: 1rem;
-    margin-top: 1rem;
-    width: 25rem;
+    /* margin-top: 1rem; */
+    width: 28rem;
 }
 
 figure{
     margin: 0;
     height: 20rem;
-    width: 25rem;
+    width: 28rem;
     border-radius: 2px;
     overflow: hidden;
     transition: all 500ms ease;
@@ -372,6 +424,15 @@ figure{
 
 .imagen-noticia:hover{
     transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+.Titulo-seccion{
+    color: red;
+    font-size: 3rem;
+    margin-block-end: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
 }
 
 .Titulo-noticia {
@@ -405,7 +466,7 @@ figure{
     /* text-align: justify; */
 }
 
-/*Publicaciones*/
+/*Publicaciones---------------------------------------------------------------------------------------------------------------*/
 
 .seccion-public h2 {
     color: red;
@@ -434,12 +495,22 @@ figure{
 }
 
 .portada{
-    height: 500px;
+    height: 700px;
 }
 
 .portada img {
     height: 100%;
     width: 100%;
+}
+
+.pie-portada{
+    
+}
+
+.pie-portada p{
+    margin-block-start: 1rem;
+    margin-block-end: 0;
+    font-style: italic;
 }
 
 .info-public{
@@ -452,27 +523,60 @@ figure{
     height: auto;
     min-width: 240px;
     margin-block-start: 2rem;
-    margin-block-end: 4rem; 
+    margin-block-end: 4rem;
+}
+
+.autor-info a{
+    color: #000000;
+}
+
+.autor-info-figure{
+    margin-right: 15px;
+    height: 7.5rem;
+    width: 7.5rem;
+    overflow: hidden;
+    border-radius: 50%;
+    border: solid 3px;
+    
 }
 
 .autor-info h5{
     font-weight: 900;
     margin-block-start: 0;
     margin-block-end: 0;
-    padding-block-end: 1rem;
+    padding-block-end: 0.5rem;
 }
+
+.autor-info h5:hover{
+    color: rgb(105, 104, 104);
+}
+
 .autor-info p{
     font-size: 1.2rem;
     margin-block-start: 0;
+    margin-block-end: 0;
+    text-transform: uppercase;
+
 }
 
 .autor-foto{
-    width: 8rem; 
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     margin-right: 15px;
+    transition: all 500ms ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.autor-foto:hover{
+    transform: scale(1.1);
+    filter: brightness(0.7);
 }
 
 .redes-autor{
+    margin-block-start: 1rem;
 }
 
 .icono_autor{
@@ -489,7 +593,33 @@ figure{
     transform: scale(1.1);
 }
 
-.recomendados{margin-block-start: 2rem;margin-block-end: 0;color: red;letter-spacing: 0.1rem;text-transform: uppercase;}
+.similares{
+    
+}
+
+.similares h4{
+    margin-block-start: 2rem;
+    margin-block-end: 2rem;
+    color: red;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    }
+
+.similares figure{
+    width: 25rem;
+}
+
+.similares-Noticia{
+    width: 25rem;
+}
+
+.recomendados{
+    margin-block-start: 2rem;
+    margin-block-end: 2rem;
+    color: red;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
 
 .Contenedor-recomendados{
     display: flex;
@@ -502,8 +632,140 @@ figure{
     justify-content: space-between;
 }
 
+/*Perfil---------------------------------------------------------------------------------------------------------------*/
 
-/*Footer*/
+.info-user{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.foto-perfil{
+    height: 18rem;
+    width: 18rem;
+    border-radius: 50%;
+    border: solid 5px;
+    margin-right: 3rem;
+}
+.info-user h2{
+    margin-block-start: 1rem;
+    margin-block-end: 0;
+    letter-spacing: 0.1rem;
+}
+
+
+.info-user h3{
+    font-size: 1.2rem;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin-right: 2.5rem;
+}
+
+
+.editar{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    border: solid 2px;
+    position: absolute;
+    left: 52%;
+    bottom: 39%;
+}
+
+.icono_editar{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 500ms ease;
+    object-fit: cover;
+
+}
+
+.icono_editar:hover{
+    transform: scale(1.1);
+}
+
+.info-user-foto{
+    height: 100%;
+    width: 100%;
+}
+
+.redes-perfil{
+    display: flex;
+}
+
+.descripcion{
+    max-width: 75rem;
+    text-align: center;
+}
+
+.user-info-related{
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+}
+
+/*Comentarios publicaciones--------------------------------------------*/
+
+.Contenedor-comentarios{
+
+}
+
+.Contenido-comentario{
+    width: 100%;
+}
+
+textarea {
+    width: 96%;
+    resize: vertical;
+    padding: 0.5rem;
+    border: 1px solid;
+    height: 7rem;
+  }
+
+.publicar{
+    margin-top: 1rem;
+    margin-left: 90%;
+}
+
+.autor-figure{
+    width: 5rem;
+    height: 5rem;
+    border: 3px solid;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.Comentario{
+    
+}
+
+.Comentario-info{
+    align-items: inherit;
+}
+
+.info-comentario{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.fecha-comentario{
+    margin-left: 1.5rem;
+}
+
+.editar-comentario{
+    height: 2rem;
+    width: 2rem;
+    margin-left: 1rem;
+    border-radius: 50%;
+}
+
+/*Footer---------------------------------------------------------------------------------------------------------------*/
 
 .Site-footer{
     background-color: #333333;

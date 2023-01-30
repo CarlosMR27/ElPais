@@ -1,6 +1,8 @@
 {% extends 'core/index.html' %}
 {% block title %}Listado{% endblock %} 
 {% load static %}
+{% block buscador %}
+{% endblock %}
 {% block content %}
 <section class="Seccion">
     <div class="Contenedor">
@@ -12,6 +14,9 @@
                 <th>Sección</th>
                 <th>Creación</th>
                 <th>Última modificación</th>
+                {% if user.is_staff or user.user_personalizado.es_editor %}
+                <th>Autor</th>
+                {% endif%}
                 <th class="tabla opciones">Opciones</th>
             </tr>
 
@@ -21,20 +26,25 @@
                 <td class="tabla-seccion">{{ i.seccion }}</td>
                 <td class="tabla-fecha">{{ i.creacion }}</td>
                 <td class="tabla-fecha">{{ i.update }}</td>
+                {% if user.is_staff or user.user_personalizado.es_editor %}
+                <td class="tabla-autor">
+                    <a href="{% url 'perfil' i.autor.user.usuario.username %}">
+                        {{ i.autor}}
+                    </a>
+                </td>
+                {% endif%}
                 <td class="tabla opciones">
                     <a class="Boton Boton-lista" href="{% url 'modificar' i.id %}">Modificar</a>
-                    <a class="Boton Boton-lista" href="#" onclick="confirmarEliminacion({{i.id}})">Eliminar</a>
-                </td>
+                    <a class="Boton Boton-lista" href="{% url 'publicacion' i.slug %}">Ver</a>
+                </td>   
             </tr>
             {% endfor %}
         </table>
         <br>
-        <div>
+        <div class="Boton-tabla">
             <a class="Boton Boton-mod" href="{% url 'home' %}">Regresar</a>
         </div>
     </div>
 </section>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript" src="{% static 'core/js/confirmacion.js' %}"></script>
 
 {% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'core/index.html' %}
+{% block title %}Perfil | {{user.username}}{% endblock %}
+{% load static %}
+{% block buscador %}
+{% endblock %}
+{% block content %}
+<section class="Contenedor">
+    <div class="contenido-perfil">
+        <div class="info-user">
+            <figure class="foto-perfil">
+                <img class="info-user-foto" src="{{perfil.user_personalizado.profilepic.url}}" alt="">
+            </figure>
+            {% if user.id == perfil.id %}
+            <figure class="editar">
+                <a href="#">
+                    <img class="icono_editar" src="{% static 'core/img/editar.png' %}" alt="">
+                </a>
+            </figure>
+            {% endif %}
+            <h2>{{perfil.user_personalizado}}</h2>
+            {% if perfil.user_personalizado.es_autor%}
+                <h3>Autor</h3>
+                <div class="redes-perfil">
+                    <a href="{{perfil.user_personalizado.autor.twitter}}">
+                        <img class="icono_autor" src="{% static 'core/img/twitter.jpg' %}" alt="">
+                    </a>
+                    <a href="{{perfil.user_personalizado.autor.ig}}">
+                        <img class="icono_autor" src="{% static 'core/img/insta.jpg' %}" alt="">
+                    </a>
+                    <a href="{{perfil.user_personalizado.autor.gmail}}">
+                        <img class="icono_autor" src="{% static 'core/img/gmail.png' %}" alt="">
+                    </a>
+                </div>
+                <div class="descripcion">
+                    <hr>
+                    <p>{{perfil.user_personalizado.autor.descripcion |safe}}</p>
+                </div>
+            {% else %}
+
+            {% endif %}
+        </div>
+        <div class="seccion-public">
+            {% if perfil.user_personalizado.es_autor %}
+            <h2>Publicaciones del autor</h2>
+            {% elif perfil.user_personalizado.es_lector %}
+            <h2>Comentarios</h2>
+            {% endif %}
+        </div>
+        <div class="user-info-related">
+            {% if perfil.user_personalizado.es_autor %}
+            {% for i in post %}
+            <div class="Noticia">
+                <a href="{% url 'publicacion' i.slug %}">
+                    <figure>
+                        <img class="imagen-noticia" src="{{i.portada.url}}">
+                    </figure>
+                </a>
+                <div class="Titulo-noticia">
+                    {% if i.seccion.name == "Actualidad" %}
+                    <a href="{% url 'actualidad' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% elif i.seccion.name == "Crónica"%}
+                    <a href="{% url 'cronica' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% elif i.seccion.name == "Internacionales"%}
+                    <a href="{% url 'internacionales' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% elif i.seccion.name == "Deportes"%}
+                    <a href="{% url 'deportes' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% elif i.seccion.name == "Insólito"%}
+                    <a href="{% url 'insolito' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% elif i.seccion.name == "Tendencias"%}
+                    <a href="{% url 'tendencias' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% elif i.seccion.name == "Farándula"%}
+                    <a href="{% url 'farandula' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% elif i.seccion.name == "Tecnología"%}
+                    <a href="{% url 'tecnologia' %}">
+                        <h2>{{i.seccion}}</h2>
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'publicacion' i.slug %}">
+                        <h1>{{i.titulo}}</h1>
+                    </a>
+                </div>
+            </div>
+            {% endfor%}
+            {% else %}
+            <p>Hay que hacer la caja de comentarios</p>
+            {% endif %}
+        </div>
+</section>
+{% endblock %}
