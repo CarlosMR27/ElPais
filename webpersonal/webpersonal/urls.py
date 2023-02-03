@@ -42,10 +42,14 @@ urlpatterns = [
     path('registro/', views.registro, name='registro'),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('<slug:slug>', views.detalle_noticia, name='publicacion'),
-    path('perfil/', views.perfil, name='perfil'),
     path('perfil/<str:username>', views.perfil, name='perfil'),
+    path('modificar_user/<str:username>', views.editar_user, name='editar_user'),
+    path('modificar_autor/<str:username>', views.editar_autor, name='editar_autor'),
     path('modificar_comentario/<id>/', views.actualizar_comentario, name='actualizar_comentario'),
     path('eliminar_comentario/<id>/', views.eliminar_comentario, name='eliminar_coment'),
+    path('editar_foto_perfil/<str:username>', views.editar_profilepic, name='editar_perfil'),
+    #path('editar_foto_perfil/<pk>', views.editar_foto_perfil.as_view(), name='editar_perfil'),
+
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

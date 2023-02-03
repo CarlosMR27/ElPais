@@ -8,47 +8,53 @@
     <div class="contenido-perfil">
         <div class="info-user">
             <figure class="foto-perfil">
-                <img class="info-user-foto" src="{{perfil.user_personalizado.profilepic.url}}" alt="">
+                <img class="info-user-foto" src="{{perfil.perfil.profilepic.url}}" alt="">
             </figure>
             {% if user.id == perfil.id %}
             <figure class="editar">
-                <a href="#">
+                <a href="{% url 'editar_perfil' user.id %}">
                     <img class="icono_editar" src="{% static 'core/img/editar.png' %}" alt="">
                 </a>
             </figure>
             {% endif %}
-            <h2>{{perfil.user_personalizado}}</h2>
-            {% if perfil.user_personalizado.es_autor%}
+            {%if user.id == perfil.id and user.perfil.es_autor %}
+            <figure class="editar editar-autor">
+                <a href="{% url 'editar_autor' user.perfil.id %}">
+                    <img class="icono_editar" src="{% static 'core/img/editar.png' %}" alt="">
+                </a>
+            </figure>
+            {% endif %}
+            <h2>{{perfil.perfil}}</h2>
+            {% if perfil.perfil.es_autor%}
                 <h3>Autor</h3>
                 <div class="redes-perfil">
-                    <a href="{{perfil.user_personalizado.autor.twitter}}">
+                    <a href="{{perfil.perfil.autor.twitter}}">
                         <img class="icono_autor" src="{% static 'core/img/twitter.jpg' %}" alt="">
                     </a>
-                    <a href="{{perfil.user_personalizado.autor.ig}}">
+                    <a href="{{perfil.perfil.autor.ig}}">
                         <img class="icono_autor" src="{% static 'core/img/insta.jpg' %}" alt="">
                     </a>
-                    <a href="{{perfil.user_personalizado.autor.gmail}}">
+                    <a href="{{perfil.perfil.autor.gmail}}">
                         <img class="icono_autor" src="{% static 'core/img/gmail.png' %}" alt="">
                     </a>
                 </div>
                 <div class="descripcion">
                     <hr>
-                    <p>{{perfil.user_personalizado.autor.descripcion |safe}}</p>
+                    <p>{{perfil.perfil.autor.descripcion |safe}}</p>
                 </div>
             {% else %}
 
             {% endif %}
         </div>
         <div class="seccion-public">
-            {% if perfil.user_personalizado.es_autor %}
+            {% if perfil.perfil.es_autor %}
             <h2>Publicaciones del autor</h2>
-            {% elif perfil.user_personalizado.es_lector %}
-            <h2>Comentarios</h2>
             {% endif %}
         </div>
         <div class="user-info-related">
-            {% if perfil.user_personalizado.es_autor %}
+            {% if perfil.perfil.es_autor %}
             {% for i in post %}
+            {% if i.es_visible %}
             <div class="Noticia">
                 <a href="{% url 'publicacion' i.slug %}">
                     <figure>
@@ -94,9 +100,9 @@
                     </a>
                 </div>
             </div>
+            {% endif %}
+            
             {% endfor%}
-            {% else %}
-            <p>Hay que hacer la caja de comentarios</p>
             {% endif %}
         </div>
 </section>

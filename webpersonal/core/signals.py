@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from .models import User_personalizado, Autor
+from .models import Perfil, Autor
 from django.contrib.auth.models import Group
 from django.dispatch import receiver
 
@@ -8,13 +8,13 @@ from django.dispatch import receiver
 @receiver(post_save, sender = User)
 def crear_perfil(sender, instance, created, **kwargs):
     if created:
-       User_personalizado.objects.create(usuario=instance)
+       Perfil.objects.create(usuario=instance)
 
-#Para cambiar el grupo y las variables de user_personalizado del autor
+#Para cambiar el grupo y las variables de Perfil del autor
 @receiver(post_save, sender = Autor)
 def cambiar_permisos(sender, instance, created, **kwargs):
     if created:
-        autor = User_personalizado.objects.get(autor=instance)
+        autor = Perfil.objects.get(autor=instance)
         autor.es_lector = False
         autor.es_autor = True
         autor.save()

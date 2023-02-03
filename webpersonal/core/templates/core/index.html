@@ -20,18 +20,18 @@
             <div class="hero">
                 <nav class="nav-d">
                     <figure>
-                        <img src="{{ user.user_personalizado.profilepic.url }}" alt="" class="user-pic" onclick="toggleMenu()">
+                        <img src="{{ user.perfil.profilepic.url }}" alt="" class="user-pic" onclick="toggleMenu()">
                     </figure>
                     <div class="sub-menu-wrap" id="subMenu">
                         <div class="sub-menu">
                             <div class="user-info"> 
                                 <figure>
-                                    <img src="{{ user.user_personalizado.profilepic.url }}" alt="">
+                                    <img src="{{ user.perfil.profilepic.url }}" alt="">
                                 </figure>
                                 <h4>{{ user.get_username }}</h4>
                             </div>
                             <hr>
-                            {% if user.is_staff or user.user_personalizado.es_editor %}
+                            {% if user.is_staff or user.perfil.es_editor %}
                             
                             {% else %}
                             <a href="{% url 'perfil' user.username %}" class="sub-menu-link">
@@ -57,7 +57,7 @@
                                 <p>Sito del Admin</p>
                             </a>
                             {% else %}
-                            <a href="#" class="sub-menu-link">
+                            <a href="{% url 'editar_user' user.username %}" class="sub-menu-link">
                                 <img src="{% static 'core/img/setting.png' %}" alt="">
                                 <p>Configuración</p>
                             </a>

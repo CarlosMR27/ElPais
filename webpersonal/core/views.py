@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Noticia,User_personalizado, Comentarios
-from .forms import Nuevanoticia, CustomUserForm, CommentForm
+from .models import Noticia,Perfil, Comentarios, Autor
+from .forms import Nuevanoticia, CustomUserForm, CommentForm, Editar_userForm, Profilepicform, AutorForm
 from django.contrib.auth import login, logout, authenticate
 from django.db.models import Q
 from django.contrib.auth.models import Group
@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required,permission_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
+import os
 # Create your views here.
 
 html_base = """
@@ -120,7 +123,7 @@ def detalle_noticia(request,slug):
         else:
             if form.is_valid():
                 comment = form.save(commit = False)
-                comment.autor = request.user.user_personalizado
+                comment.autor = request.user.perfil
                 comment.noticia = noticias
                 comment.save()
                 form = CommentForm()
@@ -136,8 +139,8 @@ def actualizar_comentario(request, id):
     comentario = Comentarios.objects.get(id = id)
     form=CommentForm(instance=comentario)
     if request.method == 'POST':
-        form = CommentForm(data = request.POST, instance=comentario)
-        if form.is_valid() and comentario.autor == request.user.user_personalizado:
+        form = CommentForm(request.POST, instance=comentario)
+        if form.is_valid() and comentario.autor == request.user.perfil:
             form.save()
         else:
            print(form.errors)
@@ -146,6 +149,7 @@ def actualizar_comentario(request, id):
 def eliminar_comentario(request, id):
     comentario = Comentarios.objects.get(id=id)
     comentario.delete()
+    return redirect(to = "home")
 #-----------------------------------------------------------------------------------------------#
                                             #Vistas Info
 def about(request):
@@ -159,13 +163,13 @@ def contact(request):
 
 @permission_required('core.view_noticia')
 def listado_noticias(request):
-    if request.user.user_personalizado.es_editor or request.user.is_staff:
+    if request.user.perfil.es_editor or request.user.is_staff:
         noticias = Noticia.objects.all().order_by('-creacion')
         data = {
             'Noticias':noticias
         }        
     else:
-        noticias = Noticia.objects.filter(autor = request.user.user_personalizado.autor).order_by('-creacion')
+        noticias = Noticia.objects.filter(autor = request.user.perfil.autor).order_by('-creacion')
         data = {
             'Noticias':noticias
         }     
@@ -180,7 +184,7 @@ def nueva_noticia(request):
         formulario = Nuevanoticia(request.POST, request.FILES)
         if formulario.is_valid():
             noticia = formulario.save(commit=False)
-            noticia.autor = request.user.user_personalizado.autor
+            noticia.autor = request.user.perfil.autor
             noticia.save()
             data['mensaje'] = 'Publicado correctamente'
         else:
@@ -193,7 +197,7 @@ def modificar_noticia(request, id):
     if request.user.is_staff:
         noticia = Noticia.objects.get(id=id)
     else:
-        noticia = Noticia.objects.get(id=id, autor = request.user.user_personalizado.autor.id)
+        noticia = Noticia.objects.get(id=id, autor = request.user.perfil.autor.id)
     data = {
         'form':Nuevanoticia(instance=noticia)
     }
@@ -245,34 +249,76 @@ def registro(request):
 
 #-----------------------------------------------------------------------------------------------#
                             #Vistas de perfil
-def perfil(request):
-    return render(request,'core/perfil.html')
 
 def perfil(request, username=None):
     current_user = request.user
     if username and username != current_user.username:
             perfil = User.objects.get(username = username)
-            if perfil.user_personalizado.es_lector:
-                #Hacer comentarios de lector
-                post = Comentarios.objects.filter(autor_id = perfil.user_personalizado)
+            if perfil.perfil.es_lector:
+                #No hay nada que mostrar en user
+                pass
             else:
                 #Obtiene las publicaciones del autor
-                post = Noticia.objects.filter(autor = perfil.user_personalizado.autor.id)
+                post = Noticia.objects.filter(autor = perfil.perfil.autor.id)
     else:
         perfil = current_user
-        if perfil.user_personalizado.es_lector:
-            #Obtiene los comentarios del user activo
-            post = Comentarios.objects.filter(autor_id = perfil.user_personalizado)
+        if perfil.perfil.es_lector:
+            #No hay nada que mostrar
+            pass
+            return render(request,'core/perfil.html', {"perfil":perfil})
         else:
             #Obtiene las publicaciones del user activo
-            post = Noticia.objects.filter(autor = current_user.user_personalizado.autor.id)
+            post = Noticia.objects.filter(autor = current_user.perfil.autor.id)
         
     return render(request,'core/perfil.html', {"perfil":perfil , "post": post})
 
-#Hacer mañana
-def editar_perfil(request):
-    user = request.user.id
-    perfil = User_personalizado.objects.get(usuario = user)
-    user_basic_info = User.objects.get(id = user)
-    if request.method == "POST":
+class editar_foto_perfil(UpdateView):
+    model = perfil
+    template_name = 'core/modificar_user.html'
+    form_class = Profilepicform
+    success_url = reverse_lazy('home')
+
+def editar_profilepic(request,username=None):
+    current_user = request.user
+    perfil = Perfil.objects.get(usuario = current_user.id)
+    form = Profilepicform(instance=request.user.perfil)
+    if username and username != current_user.username:
         pass
+    else:
+        if request.method == "POST":
+            form = Profilepicform(request.FILES , instance = perfil)
+            if form.is_valid():
+                form.save()
+            else:
+                print(form.errors)
+    return render(request, 'core/modificar_user.html',{"form": form})
+
+def editar_user(request,username=None):
+    current_user = request.user
+    user = User.objects.get(username = current_user)
+    form = Editar_userForm(instance=user)
+    if username and username != current_user.username:
+        pass
+    else:
+        if request.method == "POST":
+            form = Editar_userForm(request.POST, instance = user)
+            if form.is_valid():
+                form.save()
+            else:
+                print(form.errors)
+    return render(request, 'core/modificar_user.html',{"form": form})
+
+def editar_autor(request,username):
+    username = request.user.username
+    autor = Autor.objects.get(user_id = request.user.perfil.id)
+    form = AutorForm(instance=autor)
+    if request.user.perfil.autor != autor:
+        pass
+    else:
+        if request.method == "POST":
+            form = AutorForm(request.POST, instance = autor)
+            if form.is_valid():
+                form.save()
+            else:
+                print(form.errors)
+    return render(request, 'core/modificar_user.html',{"form": form})

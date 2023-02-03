@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user_personalizado',
             name='profilepic',
-            field=models.ImageField(default='inicio.png', upload_to=core.models.User_personalizado.user_directory_path),
+            field=models.ImageField(default='inicio.png', upload_to=core.models.Perfil.user_directory_path),
         ),
     ]

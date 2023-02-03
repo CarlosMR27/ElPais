@@ -35,13 +35,13 @@
                     <p>{{noticias.creacion|date:"d b, Y"}}</p>
                     <hr>
                     <div class="redes-autor">
-                        <a href="#">
+                        <a href="{{noticias.autor.twitter}}">
                             <img class="icono_autor" src="{% static 'core/img/twitter.jpg' %}" alt="">
                         </a>
-                        <a href="#">
+                        <a href="{{noticias.autor.ig}}">
                             <img class="icono_autor" src="{% static 'core/img/insta.jpg' %}" alt="">
                         </a>
-                        <a href="#">
+                        <a href="{{noticias.autor.gmail}}">
                             <img class="icono_autor" src="{% static 'core/img/gmail.png' %}" alt="">
                         </a>
                     </div>
@@ -59,6 +59,7 @@
                 <br>
                 <div class="Contenedor-recomendados">
                     {% for i in recomendados %}
+                    {% if i.es_visible %}
                     <div class="Noticia">
                         <div class="Contenedor-img">
                             <a href="{% url 'publicacion' i.slug %}">
@@ -106,6 +107,7 @@
                             </a>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
                 <hr>
@@ -121,7 +123,7 @@
                                     {% if user.is_anonymous %}
                                         <img class="autor-foto" src="{% static 'core/img/inicio_edit.png' %}" alt="">
                                     {% else %}
-                                        <img class="autor-foto" src="{{user.user_personalizado.profilepic.url}}" alt="">
+                                        <img class="autor-foto" src="{{user.perfil.profilepic.url}}" alt="">
                                     {% endif %}
                                     
                                 </figure>
@@ -154,7 +156,7 @@
                                     <div class="fecha-comentario">
                                         <p>{{p.creacion|date:"d b, Y"}}</p>
                                     </div>
-                                    {% if p.autor.id == request.user.user_personalizado.id or user.is_staff%}
+                                    {% if p.autor.id == request.user.perfil.id or user.is_staff%}
                                     <div>
                                         <figure class="editar-comentario">
                                             <a href="{% url 'actualizar_comentario' p.id %}">
@@ -191,6 +193,7 @@
             <div class=" similares">
                     <h4>Similares</h4>
                     {% for i in similares%}
+                    {% if i.es_visible %}
                     <div class="similares-Noticia">
                         <div class="Contenedor-img">
                             <a href="{% url 'publicacion' i.slug %}">
@@ -205,11 +208,12 @@
                             </a>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
             </div>
         </div>
     </div>
-    {% if user.is_staff or user.user_personalizado.autor.id == noticias.autor.id %}
+    {% if user.is_staff or user.perfil.autor.id == noticias.autor.id %}
     <div class="Boton-tabla">
         <a class="Boton Boton-mod" href="{% url 'modificar' noticias.id %}">Modificar</a>
     </div>

@@ -463,7 +463,7 @@ figure{
     line-height: 1.4;
     font-size: medium;
     text-transform: uppercase;
-    /* text-align: justify; */
+    text-align: left;
 }
 
 /*Publicaciones---------------------------------------------------------------------------------------------------------------*/
@@ -674,6 +674,14 @@ figure{
     left: 52%;
     bottom: 39%;
 }
+
+.editar-autor{
+    left: 56%;
+    bottom: 25%;
+    height: 3rem;
+    width: 3rem;
+}
+
 
 .icono_editar{
     height: 100%;
